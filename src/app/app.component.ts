@@ -5,11 +5,11 @@ import { Component } from '@angular/core';
   template: `
   <div class="btn-group btn-group-toggle">
   <label class="btn-primary" ngbButtonLabel>
-    <input type="checkbox" ngbButton [(ngModel)]="model.left"> NG bootstrap 
+    <input type="checkbox" ngbButton> NG bootstrap 
   </label>
   </div>
   <hr>
-  <pre>{{model | json}}</pre>
+  
     
 
   <button type="button" class="btn btn-secondary">bootstrap</button>
