@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <img src="{{col.photoUrl}}">
+        </div>
+        <div class="col-sm font-weight-bold">
+            matricule:
+            <br />
+            nom:
+            <br />
+            prenoms:
+            <br />
+            date de Naissance :
+            <br />
+
+        </div>
+        <div class="col-sm">
+            {{col.matricule}}
+            <br />
+            {{col.nom}}
+            <br />
+            {{col.prenoms}}
+            <br />
+            {{col.dateDeNaissance}}
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm">
+        </div>
+        <div class="col-sm">
+            <a href="#" (click)="creerNouveauCollegue()">Créer un nouveau collègue</a>
+        </div>
+        <div class="col-sm">
+            <button type="button" class="btn btn-primary" (click)="modifierCollegue()">Modifier</button>
+        </div>
+    </div>
+</div>

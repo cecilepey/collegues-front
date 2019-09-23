@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
+import{collegueMock} from './mock/collegues.mock'
 
 @Component({
   selector: 'app-root',
   template: `
-  <div class="btn-group btn-group-toggle">
-  <label class="btn-success" ngbButtonLabel>
-    <input type= "checkbox" ngbButton> NG bootstrap 
-  </label>
-  </div>
- 
-    
 
-  <button type="button" class="btn btn-secondary">bootstrap</button>
+    <app-collegue [col]="c1"></app-collegue>
+
+ 
   `,
   styles: []
 })
 export class AppComponent {
   title = 'collegues-front';
+  c1 = collegueMock;
+
+
+
 }
