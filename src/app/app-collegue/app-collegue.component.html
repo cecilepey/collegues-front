@@ -4,24 +4,55 @@
             <img src="{{col.photoUrl}}">
         </div>
         <div class="col-sm font-weight-bold">
-            matricule:
-            <br />
-            nom:
-            <br />
-            prenoms:
-            <br />
-            date de Naissance :
-            <br />
+            <div>
+                matricule:
+            </div>
+            <div>
+                nom:
+            </div>
+            <div>
+                prenoms:
+            </div>
+            <div>
+                date de Naissance :
+            </div>
+            <form *ngIf="affichage;else afficherLibelle">
+
+                    <div class="form-group">
+                            <label >Email</label>
+                          </div>
+                          <div class="form-group">
+                            <label >Photo</label>
+                          </div>
+             
+                  
+                    <ng-template #afficherLibelle> </ng-template>
+            </form>
 
         </div>
         <div class="col-sm">
-            {{col.matricule}}
-            <br />
-            {{col.nom}}
-            <br />
-            {{col.prenoms}}
-            <br />
-            {{col.dateDeNaissance}}
+            <div>
+                {{col.matricule}}
+            </div>
+            <div>
+                {{col.nom}}
+            </div>
+            <div>
+                {{col.prenoms}}
+            </div>
+            <div>
+                {{col.dateDeNaissance}}
+            </div>
+            <form *ngIf="affichage;else formulaire">
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Entrez email">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Entrez l'Url de la photo">
+                </div>
+                <ng-template #formulaire></ng-template>
+            </form>
+
         </div>
 
     </div>
@@ -31,10 +62,15 @@
         <div class="col-sm">
         </div>
         <div class="col-sm">
-            <a href="#" (click)="creerNouveauCollegue()">Créer un nouveau collègue</a>
+            <a href="#" (click)="creerNouveauCollegue()" *ngIf="!affichage;else supprLien">Créer un nouveau collègue</a>
+            <ng-template #supprLien></ng-template>
+
+
         </div>
         <div class="col-sm">
-            <button type="button" class="btn btn-primary" (click)="modifierCollegue()">Modifier</button>
+            <button type="button" class="btn btn-primary" (click)="modifierCollegue()"
+                *ngIf="!affichage;else changerBouton">Modifier</button>
+            <ng-template #changerBouton><button type="button" class="btn btn-primary">Valider</button> </ng-template>
         </div>
     </div>
 </div>

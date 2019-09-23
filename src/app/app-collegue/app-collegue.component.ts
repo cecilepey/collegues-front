@@ -10,6 +10,8 @@ export class AppCollegueComponent implements OnInit {
 
   @Input() col: Collegue; 
 
+  affichage: boolean = false; 
+
   constructor() { }
 
   creerNouveauCollegue(){
@@ -17,7 +19,7 @@ export class AppCollegueComponent implements OnInit {
   }
   
   modifierCollegue(){
-    console.log('modification du collègue'); 
+    this.affichage = true; 
   }
 
   ngOnInit() {
