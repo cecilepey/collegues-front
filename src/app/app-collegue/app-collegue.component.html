@@ -1,33 +1,33 @@
 <div class="container">
     <div class="row">
         <div class="col-4">
-            <img src="{{col.photoUrl}}" class="img-fluid">
+            <img src="{{col.photoUrl}}" class="img-fluid shadow  mb-2 bg-white rounded">
         </div>
-        <div class="col-sm font-weight-bold">
+        <div class="col-3 ml-2 font-weight-bold">
             <div class="row">
-                matricule:
+                Matricule:
             </div>
             <div class="row">
-                nom:
+                Nom:
             </div>
             <div class="row">
-                prenoms:
+                Prenoms:
             </div>
             <div class="row">
-                date de Naissance :
+                Date de Naissance :
             </div>
             <div class="row" *ngIf="!affichage;else afficherLibEmail">
-                email :
+                Email :
 
             </div>
             <ng-template #afficherLibEmail> </ng-template>
             <form *ngIf="affichage;else afficherLibelle">
 
                 <div class="row form-group">
-                    <label>email :</label>
+                    <label>Email :</label>
                 </div>
                 <div class="row form-group">
-                    <label>photo :</label>
+                    <label>Photo :</label>
                 </div>
 
 
@@ -36,7 +36,7 @@
             <ng-template #afficherLibelle> </ng-template>
 
         </div>
-        <div class="col-sm">
+        <div class="col-4">
             <div class="row">
                 {{col.matricule}}
             </div>
@@ -71,15 +71,15 @@
 
 
     <div class="row">
-        <div class="col-sm">
+        <div class="col-4">
         </div>
-        <div class="col-sm">
+        <div class="col-3">
             <a href="#" (click)="creerNouveauCollegue()" *ngIf="!affichage;else supprLien">Créer un nouveau collègue</a>
             <ng-template #supprLien></ng-template>
 
 
         </div>
-        <div class="col-sm">
+        <div class="col-5">
             <button type="button" class="btn btn-primary" (click)="modifierCollegue()"
                 *ngIf="!affichage;else changerBouton">Modifier</button>
             <ng-template #changerBouton><button type="button" class="btn btn-primary">Valider</button> </ng-template>
