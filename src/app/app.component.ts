@@ -14,7 +14,7 @@ import { collegueMock } from './mock/collegues.mock';
    
 
         <div class="col-7">
-        <app-collegue [col]="c1"></app-collegue>
+        <app-collegue></app-collegue>
         </div>
         </div>
         </div>
@@ -24,7 +24,6 @@ import { collegueMock } from './mock/collegues.mock';
 })
 export class AppComponent {
   title = 'collegues-front';
-  c1 = collegueMock;
 
 
 
