@@ -1,57 +1,69 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm">
-            <img src="{{col.photoUrl}}">
+        <div class="col-">
+            <img src="{{col.photoUrl}}" class="img-fluid">
         </div>
         <div class="col-sm font-weight-bold">
-            <div>
+            <div class="row">
                 matricule:
             </div>
-            <div>
+            <div class="row">
                 nom:
             </div>
-            <div>
+            <div class="row">
                 prenoms:
             </div>
-            <div>
+            <div class="row">
                 date de Naissance :
             </div>
+            <div class="row" *ngIf="!affichage;else afficherLibEmail">
+                email :
+
+            </div>
+            <ng-template #afficherLibEmail> </ng-template>
             <form *ngIf="affichage;else afficherLibelle">
 
-                    <div class="form-group">
-                            <label >Email</label>
-                          </div>
-                          <div class="form-group">
-                            <label >Photo</label>
-                          </div>
-             
-                  
-                    <ng-template #afficherLibelle> </ng-template>
+                <div class="row form-group">
+                    <label>email :</label>
+                </div>
+                <div class="row form-group">
+                    <label>photo :</label>
+                </div>
+
+
+
             </form>
+            <ng-template #afficherLibelle> </ng-template>
 
         </div>
         <div class="col-sm">
-            <div>
+            <div class="row">
                 {{col.matricule}}
             </div>
-            <div>
-                {{col.nom}}
+            <div class="row">
+                {{col.nom | uppercase}}
             </div>
-            <div>
+            <div class="row">
                 {{col.prenoms}}
             </div>
-            <div>
-                {{col.dateDeNaissance}}
+            <div class="row">
+                {{col.dateDeNaissance | date:'dd/MM/yyyy'}}
             </div>
+            <div class="row" *ngIf="!affichage;else afficherEmail">
+                {{col.email}}
+
+            </div>
+            <ng-template #afficherEmail></ng-template>
             <form *ngIf="affichage;else formulaire">
-                <div class="form-group">
+                <div class="row form-group">
                     <input type="email" class="form-control" placeholder="Entrez email">
                 </div>
-                <div class="form-group">
+                <div class="row form-group">
                     <input type="text" class="form-control" placeholder="Entrez l'Url de la photo">
                 </div>
-                <ng-template #formulaire></ng-template>
+
             </form>
+            <ng-template #formulaire></ng-template>
 
         </div>
 
