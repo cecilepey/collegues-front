@@ -15,10 +15,10 @@ import { Subscription } from 'rxjs';
     </div>
   </div>
   <div class="row mt-5" *ngIf="connecte === true;">
-      <div class="col-5">
+      <div class="col">
         <app-recherche-collegue-par-nom></app-recherche-collegue-par-nom>
       </div>
-      <div class="col-7">
+      <div class="col">
         <app-collegue ></app-collegue>
       </div>
     </div>
