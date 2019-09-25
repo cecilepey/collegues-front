@@ -1,17 +1,18 @@
 <div class="container">
     <div class="row ">
                 <div class="col-3"><label>Recherche par nom</label></div>
-                <div class="col-6"><input type="text" class="form-control" placeholder="Entrez un nom"></div>
-               <div class="col-3"> <button class="btn btn-primary " (click)="afficherRecherche('nom')">Rechercher</button></div>
+                <div class="col-6"><input type="text" class="form-control" placeholder="Entrez un nom" #nom></div>
+               <div class="col-3"> <button class="btn btn-primary " (click)="afficherRecherche(nom.value)">Rechercher</button></div>
     </div>
 
     <div class="row justify-content-md-center" *ngIf="affichage;else affichage">
        
         <ul class="list-group col-8  text-center pt-3 ">
-            <li class="list-group-item  list-group-item-light" *ngFor="let mat of tabMats">
+            <a href="#"class="list-group-item list-group-item-action" *ngFor="let mat of tabMats" (click)="recupererCollegueCourant(mat)">
                 {{mat}}
-            </li>
+            </a>
         </ul>
     </div>
     <ng-template #affichage></ng-template>
 </div>
+

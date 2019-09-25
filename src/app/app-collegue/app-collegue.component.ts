@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Collegue } from '../models/Collegue';
-import { DataService} from '../services/data.service'
+import { DataService } from '../services/data.service'
+import { Observable, Subscription } from 'rxjs';
 
 
 @Component({
@@ -10,25 +11,37 @@ import { DataService} from '../services/data.service'
 })
 export class AppCollegueComponent implements OnInit {
 
- col: Collegue; 
 
-  affichage: boolean = false; 
+  actionSub:Subscription
 
-  constructor(private dataService: DataService) { 
-    
+  col: Collegue = new Collegue('', '', '', '', null, '');
+
+  affichage: boolean = false;
+
+  constructor(private dataService: DataService) {
+
   }
 
-  creerNouveauCollegue(){
-    console.log('créer un nouveau collègue'); 
+  creerNouveauCollegue() {
+    console.log('créer un nouveau collègue');
   }
-  
-  modifierCollegue(){
-    this.affichage = true; 
+
+  modifierCollegue() {
+    this.affichage = true;
   }
+
+
 
 
   ngOnInit() {
-   this.col = this.dataService.recupererCollegueCourant(); 
+   this.actionSub = this.dataService.subCollegueObs.subscribe(collegue => {
+      this.col = collegue
+    }, err => { console.log(err.message)})
+  }
+
+  ngOnDestroy(): void {
+     this.actionSub.unsubscribe();
+    
   }
 
 }
