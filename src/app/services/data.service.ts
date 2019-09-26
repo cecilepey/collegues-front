@@ -77,38 +77,6 @@ export class DataService {
 
     const URL_BACKEND = environment.backendUrl + '/collegues/' + matricule;
 
-    /*if (this.collegueCache) {
-
-      this.collegueCache.filter( collegue =>{
-
-       if( collegue.matricule === matricule){
-          this.subCollegue.next()
-        console.log(collegue)
-        return of(collegue)
-      } else {
-          return this._http.get<Collegue>(URL_BACKEND, { withCredentials: true })
-            .pipe(
-              tap(col => {
-                console.log(col)
-                this.collegueCache.push(col)
-                this.subCollegue.next(col)
-              })
-            )
-
-      }
-        
-    })} else {
-      return this._http.get<Collegue>(URL_BACKEND, { withCredentials: true })
-        .pipe(
-          tap(col => {
-            this.collegueCache = [col] 
-            this.subCollegue.next(col)
-          })
-        )
-    }*/
-
-
-
      return this._http.get<Collegue>(URL_BACKEND, { withCredentials: true})
      .pipe(
          tap(col =>{
