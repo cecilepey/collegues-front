@@ -29,10 +29,9 @@ export class RechercheCollegueParNomComponent implements OnInit {
      if(this.tabMats.length===0){
        this.tabVide = 1; 
      }
-     console.log(this.tabVide)
 
      this.affichage = true;
-    }, err => {console.log(err.message)}); 
+    }, err => {}); 
     
     return false;
   }
@@ -41,7 +40,7 @@ export class RechercheCollegueParNomComponent implements OnInit {
  
     this.dataService.recupererCollegueCourant(matricule)
     .subscribe(data =>{
-    }, err =>{ console.log(err.message)
+    }, err =>{ 
 
     });
   }

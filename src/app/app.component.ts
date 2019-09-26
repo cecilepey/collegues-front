@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 
   <div class="row" *ngIf="connecte === false;">
     <div class="mx-auto mt-5">
-      <app-login ></app-login>
+      <app-login></app-login>
     </div>
   </div>
   <div class="row mt-5" *ngIf="connecte === true;">

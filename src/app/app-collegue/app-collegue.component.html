@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="affichage">
     <div class="row">
         <div class="col-4">
             <img src="{{col.photoUrl}}" class="img-fluid shadow  mb-2 bg-white rounded ">
@@ -20,41 +20,116 @@
                 <div class="col-4 font-weight-bold"> Date de Naissance : </div>
                 <div class="col-8"> {{col.dateDeNaissance | date:'dd/MM/yyyy'}}</div>
             </div>
-            <div class="row" *ngIf="!affichage;else afficherLibEmail">
+            <div class="row">
                 <div class="col-4 font-weight-bold"> Email :</div>
                 <div class="col-8"> {{col.email}}</div>
             </div>
-            <ng-template #afficherLibEmail> </ng-template>
-
-         
-            <div class="row" *ngIf="affichage;else afficherEmail">
-                <div class="col-4 font-weight-bold"> Email :</div>
-                <div class="col-8"><input type="email" class="form-control" placeholder="Entrez email"></div>
-            </div>
-            <ng-template #afficherEmail> </ng-template>
-            <div class="row mt-2" *ngIf="affichage;else afficherPhoto">
-                    <div class="col-4 font-weight-bold"> Photo :</div>
-                    <div class="col-8"><input type="text" class="form-control" placeholder="Entrez l'Url de la photo"></div>
-                </div>
-                <ng-template #afficherPhoto> </ng-template>
-
         </div>
     </div>
-
-
     <div class="row mt-2">
         <div class="col-4">
         </div>
         <div class="col-3">
-            <a href="#" (click)="creerNouveauCollegue()" *ngIf="!affichage;else supprLien">Créer un nouveau collègue</a>
-            <ng-template #supprLien></ng-template>
-
-
+            <a href="#" (click)="creerNouveauCollegue()">Créer un nouveau collègue</a>
         </div>
         <div class="col-5">
-            <button type="button" class="btn btn-primary" (click)="modifierCollegue()"
-                *ngIf="!affichage;else changerBouton">Modifier</button>
-            <ng-template #changerBouton><button type="button" class="btn btn-primary">Valider</button> </ng-template>
+            <button type="button" class="btn btn-primary" (click)="modifierCollegue()">Modifier</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="container" *ngIf="modification">
+    <div class="row">
+        <div class="col-4">
+            <img src="{{col.photoUrl}}" class="img-fluid shadow  mb-2 bg-white rounded ">
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <div class="col-4 font-weight-bold"> Matricule : </div>
+                <div class="col-8">{{col.matricule}}</div>
+            </div>
+            <div class="row">
+                <div class="col-4 font-weight-bold"> Nom: </div>
+                <div class="col-8"> {{col.nom | uppercase}}</div>
+            </div>
+            <div class="row">
+                <div class="col-4 font-weight-bold"> Prenoms: </div>
+                <div class="col-8"> {{col.prenoms}}</div>
+            </div>
+            <div class="row">
+                <div class="col-4 font-weight-bold"> Date de Naissance : </div>
+                <div class="col-8"> {{col.dateDeNaissance | date:'dd/MM/yyyy'}}</div>
+            </div>
+            <div class="row">
+                <div class="col-4 font-weight-bold"><label for="email">Email :</label> </div>
+                <div class="col-8"><input type="email" id="email" class="form-control" #etatEmail="ngModel"
+                        [(ngModel)]="col.email" [ngModelOptions]="{updateOn: 'blur'}" name="email" required></div>
+                <p *ngIf="etatEmail.invalid" class="text-danger">Veuillez entrer un email</p>
+            </div>
+            <div class="row mt-2">
+                <div class="col-4 font-weight-bold"><label for="photo">Photo :</label> </div>
+                <div class="col-8"><input type="text" class="form-control" id="photo" #etatPhoto="ngModel"
+                        [(ngModel)]="col.photoUrl" [ngModelOptions]="{updateOn: 'blur'}" minlength="7" name="photoUrl"
+                        required></div>
+                <p *ngIf="etatPhoto.invalid" class="text-danger">L'url de la photo est obligatoire et doit faire 7
+                    caractères minimum</p>
+            </div>
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-8 mt-2">
+                    <p *ngIf="erreurModif != null" class="text-danger">{{erreurModif}}</p>
+                    <button type="button" class="btn btn-primary mr-5" (click)="envoieModifCollegue(col)">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="creation">
+    <div class="row">
+        <div class="col-4">
+            <img src="" class="img-fluid shadow  mb-2 bg-white rounded ">
+        </div>
+        <div class="col-8">
+            <form>
+                <div class="row">
+                    <div class="col-4 font-weight-bold"><label for="nom">Nom: </label></div>
+                    <div class="col-8"><input type="text" id="nom" class="form-control"  name="nom" placeholder="nom" #nom required>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-4 font-weight-bold"><label for="prenoms">Prenoms: </label></div>
+                    <div class="col-8"><input type="text" id="prenoms"  class="form-control" name="prenoms"
+                            placeholder="prenoms" #prenoms required></div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-4 font-weight-bold"><label for="dateDeNaissance" >Date de naissance: </label>
+                    </div>
+                    <div class="col-8"><input type="date" id="dateDeNaissance" class="form-control"
+                            name="dateDeNaissance"  placeholder="Date de naissance" #dateDeNaissance required></div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-4 font-weight-bold"><label for="email">Email: </label>
+                    </div>
+                    <div class="col-8"><input type="email" id="email"  class="form-control" #email name="email"
+                            placeholder="email" required></div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-4 font-weight-bold"><label for="photoUrl">Photo URL: </label>
+                    </div>
+                    <div class="col-8"><input type="photoUrl" id="photoUrl" #photo  class="form-control" name="photoUrl"
+                            placeholder="photo URL" required></div>
+                </div>
+                <div class="row mt-2">
+                        <div class="col-4 font-weight-bold"></div>
+                        <p *ngIf="erreurCreation != null" class="text-danger">{{erreurCreation}}</p>
+                        <div class="col-8">
+                             <button type="button"  class="btn btn-primary mr-5" (click)="creerCollegue(nom.value, prenoms.value, dateDeNaissance.value, email.value, photo.value)">Créer</button>
+                            <!--<button type="button" class="btn btn-primary mr-5" (click)="creerCollegue(nom.value, prenoms.value, dateDeNaissance.value, email.value, photo.value)">Créer</button> -->
+                            </div>
+                    </div>
+            </form>
         </div>
     </div>
 </div>

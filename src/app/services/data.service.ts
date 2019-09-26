@@ -63,7 +63,7 @@ export class DataService {
       .subscribe((data: any) => {
         this.subConnecte.next(true)
       }, (error: HttpErrorResponse) => {
-        console.log(error.message)
+      
 
       });
 
@@ -85,6 +85,43 @@ export class DataService {
      )
 
 
+  }
+
+  modifierCollegue(collegue: Collegue){
+
+    const URL_BACKEND = environment.backendUrl + '/collegues/' + collegue.matricule; 
+
+    return this._http.patch(URL_BACKEND, {
+      email : collegue.email, 
+      photoUrl: collegue.photoUrl
+    },
+      
+    {
+      headers: new HttpHeaders({ "Content-Type": "application/json" }),
+      withCredentials: true
+    })
+ 
+  }
+
+  creerCollegue(collegue: Collegue){
+
+    const URL_BACKEND = environment.backendUrl + '/collegues/'; 
+
+   return this._http
+    .post(URL_BACKEND, {
+      nom: collegue.nom,
+      prenoms: collegue.prenoms,
+      email: collegue.email, 
+      dateDeNaissance : collegue.dateDeNaissance, 
+      photoUrl: collegue.photoUrl
+    },
+
+      {
+        headers: new HttpHeaders({ "Content-Type": "application/json" }),
+        withCredentials: true,
+        responseType: 'text'
+      }
+    );
   }
 
 }

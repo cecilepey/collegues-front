@@ -11,32 +11,72 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class AppCollegueComponent implements OnInit {
 
+  affichage: boolean = true; 
+
+  modification: boolean = false;
+
+  creation: boolean = false; 
 
   actionSub:Subscription
 
-  col: Collegue = new Collegue('', '', '', '', null, '');
+  col: Collegue = new Collegue('', '', '', null, '', '');
 
-  affichage: boolean = false;
+  erreurModif = null; 
+
+  erreurCreation = null; 
 
   constructor(private dataService: DataService) {
 
   }
 
   creerNouveauCollegue() {
-    console.log('créer un nouveau collègue');
+    this.affichage= false; 
+    this.creation = true; 
+    
   }
 
   modifierCollegue() {
-    this.affichage = true;
+    this.affichage = false; 
+    this.modification = true;
   }
 
+  envoieModifCollegue( collegue: Collegue){
+    this.dataService.modifierCollegue(collegue)
+    .subscribe(col => {
+      this.modification = false; 
+      this.affichage = true; 
+    }, err =>{
+      this.erreurModif = err.error
+    });
+  
+    
+  }
 
+  creerCollegue(nom: string, prenoms: string, dateDeNaissance: string, email: string, photoUrl: string){
+
+    this.creation = false; 
+
+    
+
+   const collegue = new Collegue(nom, prenoms, email, new Date(dateDeNaissance), photoUrl)
+
+   this.dataService.creerCollegue(collegue).subscribe( result =>{
+  
+    this.creation = true; 
+
+   }, err =>{
+     this.erreurCreation = err.error; 
+
+   })
+  }
 
 
   ngOnInit() {
    this.actionSub = this.dataService.subCollegueObs.subscribe(collegue => {
       this.col = collegue
-    }, err => { console.log(err.message)})
+      this.creation = false; 
+      this.affichage = true; 
+    }, err => { })
   }
 
   ngOnDestroy(): void {
