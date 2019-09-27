@@ -7,6 +7,8 @@ import { RechercheCollegueParNomComponent } from './recherche-collegue-par-nom/r
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { UrlValidatorDirective } from './validators/url-validator.directive';
+import { EmailValidatorDirective } from './validators/email-validator.directive';
 
 
 
@@ -16,6 +18,8 @@ import { FormsModule } from '@angular/forms';
     AppCollegueComponent,
     RechercheCollegueParNomComponent,
     LoginComponent,
+    UrlValidatorDirective,
+    EmailValidatorDirective,
   ],
   imports: [
     BrowserModule,

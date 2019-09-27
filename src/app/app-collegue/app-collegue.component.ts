@@ -20,6 +20,7 @@ export class AppCollegueComponent implements OnInit {
   actionSub:Subscription
 
   col: Collegue = new Collegue('', '', '', null, '', '');
+  
 
   erreurModif = null; 
 
@@ -52,13 +53,13 @@ export class AppCollegueComponent implements OnInit {
     
   }
 
-  creerCollegue(nom: string, prenoms: string, dateDeNaissance: string, email: string, photoUrl: string){
+  creerCollegue(){
 
     this.creation = false; 
 
     
 
-   const collegue = new Collegue(nom, prenoms, email, new Date(dateDeNaissance), photoUrl)
+   const collegue = this.col;
 
    this.dataService.creerCollegue(collegue).subscribe( result =>{
   
@@ -66,6 +67,7 @@ export class AppCollegueComponent implements OnInit {
 
    }, err =>{
      this.erreurCreation = err.error; 
+     this.creation = true; 
 
    })
   }

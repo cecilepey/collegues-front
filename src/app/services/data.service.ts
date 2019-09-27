@@ -6,7 +6,8 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpResponse, HttpErrorResponse } from "@angular/common/http";
 import { HttpHeaders } from "@angular/common/http";
 import { Observable, Subject, BehaviorSubject, of } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, catchError } from 'rxjs/operators';
+import { ValidationErrors } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,8 @@ export class DataService {
 
   private subConnecte = new BehaviorSubject(false);
 
+  private subEmail = new Subject<ValidationErrors>(); 
+
   public tabMatricules: string[];
 
   constructor(private _http: HttpClient) { }
@@ -29,6 +32,9 @@ export class DataService {
     return this.subCollegue.asObservable()
   }
 
+  get subEmailObs(): Observable<ValidationErrors>{
+    return this.subEmail.asObservable()
+  }
 
   get subConnecteObs() {
     return this.subConnecte.asObservable()
@@ -122,6 +128,24 @@ export class DataService {
         responseType: 'text'
       }
     );
+  }
+
+
+  validerEmail(email: string) : Observable<ValidationErrors>{
+
+    const URL_BACKEND = environment.backendUrl + '/collegues?email='+email; 
+
+    return this._http.get<Observable<ValidationErrors>>(URL_BACKEND,       {
+      headers: new HttpHeaders({ "Content-Type": "application/json" }),
+      withCredentials: true
+    })
+    .pipe(
+      catchError(() => 
+        of( {erreur: true})
+      )
+    )
+    
+
   }
 
 }
