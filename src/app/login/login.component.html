@@ -1,14 +1,16 @@
-<div class="container">
-    <h2 >Veuillez entrer vos informations de connexion </h2>
-    <form  >
+<div class="container mt-5">
+
+    <h2>Veuillez entrer vos informations de connexion </h2>
+    <form>
         <div class="form-row" ngForm>
             <div class="col-5">
                 <input type="email" class="form-control" value="cecile@collegue.fr" #email>
             </div>
             <div class="col-5">
-                <input type="password" class="form-control"  value="test" #mdp>
+                <input type="password" class="form-control" value="test" #mdp>
             </div>
             <button type="submit" class="btn btn-primary" (click)="connexion(email.value, mdp.value)">Valider</button>
         </div>
     </form>
+
 </div>

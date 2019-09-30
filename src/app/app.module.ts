@@ -9,6 +9,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { UrlValidatorDirective } from './validators/url-validator.directive';
 import { EmailValidatorDirective } from './validators/email-validator.directive';
+import { MenuComponentComponent } from './menu-component/menu-component.component';
+import { GallerieComponent } from './gallerie/gallerie.component';
+import { AProposComponent } from './a-propos/a-propos.component';
+import { ROUTES } from './app.routes'
+import { RouterModule } from '@angular/router';
+import { AccueilComponent } from './accueil/accueil.component';
+import { GalerieDetailComponent } from './galerie-detail/galerie-detail.component';
 
 
 
@@ -20,11 +27,17 @@ import { EmailValidatorDirective } from './validators/email-validator.directive'
     LoginComponent,
     UrlValidatorDirective,
     EmailValidatorDirective,
+    MenuComponentComponent,
+    GallerieComponent,
+    AProposComponent,
+    AccueilComponent,
+    GalerieDetailComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule, 
-    FormsModule
+    FormsModule, 
+    RouterModule.forRoot(ROUTES)
   ],
   providers: [],
   bootstrap: [AppComponent]

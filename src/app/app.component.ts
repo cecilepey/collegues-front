@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { collegueMock } from './mock/collegues.mock';
 import { DataService } from './services/data.service';
 import { Subscription } from 'rxjs';
 
@@ -7,23 +6,15 @@ import { Subscription } from 'rxjs';
   selector: 'app-root',
   template: `
 
-  <div class="container-fluid mt-3">
-
-  <div class="row" *ngIf="connecte === false;">
-    <div class="mx-auto mt-5">
-      <app-login></app-login>
-    </div>
-  </div>
-  <div class="row mt-5" *ngIf="connecte === true;">
-      <div class="col">
-        <app-recherche-collegue-par-nom></app-recherche-collegue-par-nom>
-      </div>
-      <div class="col">
-        <app-collegue ></app-collegue>
-      </div>
-    </div>
-  </div>
  
+  <div class="container-fluid">
+  
+    <app-menu-component></app-menu-component>
+
+    <router-outlet></router-outlet>
+    
+  </div>
+
   `,
   styles: []
 })
@@ -33,10 +24,10 @@ export class AppComponent {
 
   title = 'collegues-front';
 
-  connecte: boolean; 
+  connecte: boolean;
 
-  constructor(private dataService: DataService){
-    this.actionSub = this.dataService.subConnecteObs.subscribe(result =>{ this.connecte = result})
+  constructor(private dataService: DataService) {
+    this.actionSub = this.dataService.subConnecteObs.subscribe(result => { this.connecte = result })
   }
 
   ngOnDestroy(): void {

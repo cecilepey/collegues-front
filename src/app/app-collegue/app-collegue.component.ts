@@ -11,79 +11,66 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class AppCollegueComponent implements OnInit {
 
-  affichage: boolean = true; 
+  affichage: boolean = true;
 
   modification: boolean = false;
 
-  creation: boolean = false; 
+  creation: boolean = false;
 
-  actionSub:Subscription
+  actionSub: Subscription
 
   col: Collegue = new Collegue('', '', '', null, '', '');
-  
 
-  erreurModif = null; 
+  erreurModif = null;
 
-  erreurCreation = null; 
+  erreurCreation = null;
 
-  constructor(private dataService: DataService) {
-
-  }
+  constructor(private dataService: DataService) { }
 
   creerNouveauCollegue() {
-    this.affichage= false; 
-    this.creation = true; 
-    
+    this.affichage = false;
+    this.creation = true;
   }
 
   modifierCollegue() {
-    this.affichage = false; 
+    this.affichage = false;
     this.modification = true;
   }
 
-  envoieModifCollegue( collegue: Collegue){
+  envoieModifCollegue(collegue: Collegue) {
     this.dataService.modifierCollegue(collegue)
-    .subscribe(col => {
-      this.modification = false; 
-      this.affichage = true; 
-    }, err =>{
-      this.erreurModif = err.error
-    });
-  
-    
+      .subscribe(col => {
+        this.modification = false;
+        this.affichage = true;
+      }, err => {
+        this.erreurModif = err.error
+      });
   }
 
-  creerCollegue(){
+  creerCollegue() {
 
-    this.creation = false; 
-
-    
-
-   const collegue = this.col;
-
-   this.dataService.creerCollegue(collegue).subscribe( result =>{
-  
-    this.creation = true; 
-
-   }, err =>{
-     this.erreurCreation = err.error; 
-     this.creation = true; 
-
-   })
+    this.creation = false;
+    const collegue = this.col;
+    this.dataService.creerCollegue(collegue).subscribe(result => {
+      this.creation = true;
+    }, err => {
+      this.erreurCreation = err.error;
+      this.col = collegue;
+      this.creation = true;
+    })
   }
 
 
   ngOnInit() {
-   this.actionSub = this.dataService.subCollegueObs.subscribe(collegue => {
+    this.actionSub = this.dataService.subCollegueObs.subscribe(collegue => {
       this.col = collegue
-      this.creation = false; 
-      this.affichage = true; 
+      this.creation = false;
+      this.affichage = true;
     }, err => { })
   }
 
   ngOnDestroy(): void {
-     this.actionSub.unsubscribe();
-    
+    this.actionSub.unsubscribe();
   }
 
 }

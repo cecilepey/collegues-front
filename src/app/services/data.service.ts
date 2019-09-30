@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Collegue } from '../models/Collegue';
-//import {tabMatricules} from '../mock/matricules.mock';
-import { collegueMock } from '../mock/collegues.mock';
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpResponse, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { HttpHeaders } from "@angular/common/http";
 import { Observable, Subject, BehaviorSubject, of } from 'rxjs';
-import { tap, map, catchError } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 import { ValidationErrors } from '@angular/forms';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,18 +21,12 @@ export class DataService {
 
   private subConnecte = new BehaviorSubject(false);
 
-  private subEmail = new Subject<ValidationErrors>(); 
-
   public tabMatricules: string[];
 
   constructor(private _http: HttpClient) { }
 
   get subCollegueObs(): Observable<Collegue> {
     return this.subCollegue.asObservable()
-  }
-
-  get subEmailObs(): Observable<ValidationErrors>{
-    return this.subEmail.asObservable()
   }
 
   get subConnecteObs() {
@@ -48,13 +41,11 @@ export class DataService {
 
   }
 
-  connexion(email: string, mdp: string) {
+  connexion(email: string, mdp: string) : Observable<string | void>  {
 
     const URL_BACKEND = environment.backendUrl + '/auth';
 
-    // const httpOptions = ;
-
-    this._http
+    return this._http
       .post(URL_BACKEND, {
         email: email,
         motDePasse: mdp
@@ -66,20 +57,16 @@ export class DataService {
           responseType: 'text'
         }
       )
-      .subscribe((data: any) => {
-        this.subConnecte.next(true)
-      }, (error: HttpErrorResponse) => {
+      .pipe(
+        tap( data => {
+          this.subConnecte.next(true)
+        }, (error: HttpErrorResponse) => {
       
-
-      });
-
-
-
+        }))
   }
 
 
   recupererCollegueCourant(matricule: string): Observable<Collegue> {
-
 
     const URL_BACKEND = environment.backendUrl + '/collegues/' + matricule;
 
@@ -89,8 +76,6 @@ export class DataService {
            this.subCollegue.next(col)
          })
      )
-
-
   }
 
   modifierCollegue(collegue: Collegue){
@@ -144,8 +129,26 @@ export class DataService {
         of( {erreur: true})
       )
     )
+  }
+
+  rechercherPhotos(){
+
+    const URL_BACKEND = environment.backendUrl + '/collegues/photos'; 
     
+    return this._http.get<Collegue[]>(URL_BACKEND, { withCredentials: true}); 
 
   }
+
+  isLoggedIn() : Observable<boolean> {
+
+    const URL_BACKEND = environment.backendUrl + '/user'
+
+    return this._http.get(URL_BACKEND, { withCredentials: true, responseType: 'text'})
+    .pipe( map(() => true),
+      catchError(()=> of(false)))
+ 
+
+  }
+
 
 }

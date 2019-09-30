@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row ">
-                <div class="col-3 font-weight-bold"><label>Recherche par nom :</label></div>
+                <div class="col-3 font-weight-bold"><label>Recherche par nom:</label></div>
                 <div class="col-6"><input type="text" class="form-control" value="Peyras" #nom></div>
                <div class="col-3"> <button class="btn btn-primary " (click)="afficherRecherche(nom.value)">Rechercher</button></div>
     </div>
@@ -12,7 +12,7 @@
     <div class="row justify-content-md-center" *ngIf="affichage;else affichage">
        
         <ul class="list-group col-8  text-center pt-3 ">
-            <a href="#"class="list-group-item list-group-item-action" *ngFor="let mat of tabMats" (click)="recupererCollegueCourant(mat)">
+            <a class="list-group-item list-group-item-action" *ngFor="let mat of tabMats" (click)="recupererCollegueCourant(mat)">
                 {{mat}}
             </a>
         </ul>

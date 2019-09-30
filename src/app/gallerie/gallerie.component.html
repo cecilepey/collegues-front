@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row mt-3">
+        <div *ngFor="let collegue of tabCollegue" class="col-4 mt-2">
+
+            <div>
+                <a routerLink="/galerie/{{collegue.matricule}}" > <img src="{{collegue.photoUrl}}"
+                        class="img-fluid rounded"></a>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>

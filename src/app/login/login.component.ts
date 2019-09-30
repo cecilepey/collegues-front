@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,13 +11,17 @@ export class LoginComponent implements OnInit {
 
 
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private router: Router) { }
 
   connexion(email: string, mdp: string) {
 
-    this.dataService.connexion(email, mdp)
+    this.dataService.connexion(email, mdp).subscribe(
+      ()=>{ this.router.navigate(['accueil'])
 
-    return false;
+}, err => err
+    )
+    
+
 
   }
 
