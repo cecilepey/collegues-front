@@ -33,7 +33,7 @@
             <a (click)="creerNouveauCollegue()">Créer un nouveau collègue</a>
         </div>
         <div class="col-5">
-            <button type="button" class="btn btn-primary" (click)="modifierCollegue()">Modifier</button>
+            <button type="button" class="btn btn-dark" (click)="modifierCollegue()">Modifier</button>
         </div>
     </div>
 </div>
@@ -79,7 +79,7 @@
                 <div class="col-4"></div>
                 <div class="col-8 mt-2">
                     <p *ngIf="erreurModif != null" class="text-danger">{{erreurModif}}</p>
-                    <button type="button" class="btn btn-primary mr-5" (click)="envoieModifCollegue(col)" [disabled]="etatPhoto.invalid || etatEmail.invalid " >Valider</button>
+                    <button type="button" class="btn btn-dark mr-5" (click)="envoieModifCollegue(col)" [disabled]="etatPhoto.invalid || etatEmail.invalid " >Valider</button>
                 </div>
             </div>
         </div>
@@ -136,7 +136,7 @@
                         <div class="col-4 font-weight-bold"></div>
                         <p *ngIf="erreurCreation != null" class="text-danger">{{erreurCreation}}</p>
                         <div class="col-8">
-                            <button type="button" class="btn btn-primary mr-5" (click)="creerCollegue()" [disabled]="monForm.invalid">Créer</button>
+                            <button type="button" class="btn btn-dark mr-5" (click)="creerCollegue()" [disabled]="monForm.invalid">Créer</button>
                             </div>
                     </div>
             </form>
