@@ -16,6 +16,7 @@ import { ROUTES } from './app.routes'
 import { RouterModule } from '@angular/router';
 import { AccueilComponent } from './accueil/accueil.component';
 import { GalerieDetailComponent } from './galerie-detail/galerie-detail.component';
+import { MenuComponent } from './menu/menu.component';
 
 
 
@@ -32,6 +33,7 @@ import { GalerieDetailComponent } from './galerie-detail/galerie-detail.componen
     AProposComponent,
     AccueilComponent,
     GalerieDetailComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,

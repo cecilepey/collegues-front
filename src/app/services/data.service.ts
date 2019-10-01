@@ -150,5 +150,20 @@ export class DataService {
 
   }
 
+  deconnexion(){
+
+    const URL_BACKEND = environment.backendUrl + '/logout'; 
+
+    return this._http
+    .post(URL_BACKEND, 
+      {
+        headers: new HttpHeaders({ "Content-Type": "application/json" }),
+        withCredentials: true,
+        responseType: 'text'
+      }
+    );
+
+  }
+
 
 }
